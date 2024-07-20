@@ -4,87 +4,105 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 from tkinter import ttk
 
-def sostituisci_parola(file_input, file_output):
+# Dictionary of substitutions as a constant
+SUBSTITUTIONS = {
+    'stampa': 'print',
+    'se': 'if',
+    'altrimenti': 'else',
+    'altrimentise': 'elif',
+    'definisci': 'def',
+    'classe': 'class',
+    'falso': 'False',
+    'vero': 'True',
+    'importa': 'import',
+    'e': 'and',
+    'stop': 'break',
+    'mentre': 'while',
+    'continua': 'continue',
+    'perogni': 'for',
+    'in': 'in',
+    'ritorna': 'return',
+    'prova': 'try',
+    'eccetto': 'except',
+    'finalmente': 'finally',
+    'alza': 'raise',
+    'con': 'with',
+    'nonlocale': 'nonlocal',
+    'globale': 'global',
+    'lambda': 'lambda',
+    'asincrono': 'async',
+    'attendi': 'await',
+    'non': 'not',
+    'o': 'or',
+    'è': 'is',
+    'passa': 'pass',
+    'aspetta': 'await',
+    'asserisci': 'assert',
+    'elimina': 'del',
+    'nessuno': 'None'
+}
+
+def replace_word(input_file, output_file):
+    """
+    Replaces Italian keywords in a file with corresponding English keywords.
+
+    Args:
+        input_file (str): The path of the input file.
+        output_file (str): The path of the output file.
+    """
     try:
-        with open(file_input, 'r') as f_input:
+        with open(input_file, 'r') as f_input:
             content = f_input.read()
 
-        sostituzioni = {
-            'stampa': 'print',
-            'se': 'if',
-            'altrimenti': 'else',
-            'altrimentise': 'elif',
-            'definisci': 'def',
-            'classe': 'class',
-            'falso': 'False',
-            'vero': 'True',
-            'importa': 'import',
-            'e': 'and',
-            'stop': 'break',
-            'mentre': 'while',
-            'continua': 'continue',
-            'perogni': 'for',
-            'in': 'in',
-            'ritorna': 'return',
-            'prova': 'try',
-            'eccetto': 'except',
-            'finalmente': 'finally',
-            'alza': 'raise',
-            'con': 'with',
-            'nonlocale': 'nonlocal',
-            'globale': 'global',
-            'lambda': 'lambda',
-            'asincrono': 'async',
-            'attendi': 'await',
-            'non': 'not',
-            'o': 'or',
-            'è': 'is',
-            'passa': 'pass',
-            'aspetta': 'await',
-            'asserisci': 'assert',
-            'elimina': 'del',
-            'nessuno': 'None'
-        }
+        for italian_word, english_word in SUBSTITUTIONS.items():
+            content = re.sub(r'\b' + re.escape(italian_word) + r'\b', english_word, content)
 
-        for parola_italiana, parola_inglese in sostituzioni.items():
-            content = re.sub(r'\b' + re.escape(parola_italiana) + r'\b', parola_inglese, content)
-
-        with open(file_output, 'w') as f_output:
+        with open(output_file, 'w') as f_output:
             f_output.write(content)
 
-        print(f"Sostituzione completata. Il file risultante è stato salvato come '{file_output}'.")
-        messagebox.showinfo("Successo", f"Sostituzione completata. Il file risultante è stato salvato come '{file_output}'.")
+        print(f"Replacement completed. The resulting file has been saved as '{output_file}'.")
+        messagebox.showinfo("Success", f"Replacement completed. The resulting file has been saved as '{output_file}'.")
 
     except FileNotFoundError:
-        print(f"Errore: Il file '{file_input}' non è stato trovato.")
-        messagebox.showerror("Errore", f"Errore: Il file '{file_input}' non è stato trovato.")
+        print(f"Error: The file '{input_file}' was not found.")
+        messagebox.showerror("Error", f"Error: The file '{input_file}' was not found.")
     except Exception as e:
-        print(f"Errore: {e}")
-        messagebox.showerror("Errore", f"Errore: {e}")
+        print(f"Error: {e}")
+        messagebox.showerror("Error", f"Error: {e}")
 
-def seleziona_file():
-    file_path = filedialog.askopenfilename(filetypes=[("File M", "*.M")])
+def select_file():
+    """
+    Opens a file dialog to select a .M file and starts the word replacement process.
+    """
+    file_path = filedialog.askopenfilename(filetypes=[("M Files", "*.M")])
     if file_path:
-        file_output = file_path.replace('.M', '_interpretato.py')
-        sostituisci_parola(file_path, file_output)
+        output_file = file_path.replace('.M', '_interpreted.py')
+        replace_word(file_path, output_file)
 
-# Creazione della finestra principale
-root = tk.Tk()
-root.title("Convertitore di File .M a Python")
-root.geometry("500x300")
+def create_interface():
+    """
+    Creates and configures the application's graphical interface.
+    """
+    # Create the main window
+    root = tk.Tk()
+    root.title("M File to Python Converter")
+    root.geometry("500x300")
 
-# Applicare uno stile moderno con ttk
-style = ttk.Style()
-style.configure("TButton", font=("Helvetica", 14), padding=10)
-style.configure("TFrame", padding=20)
+    # Apply a modern style with ttk
+    style = ttk.Style()
+    style.configure("TButton", font=("Helvetica", 14), padding=10)
+    style.configure("TFrame", padding=20)
 
-# Creazione del frame per centralizzare i widget
-frame = ttk.Frame(root)
-frame.pack(expand=True)
+    # Create a frame to centralize the widgets
+    frame = ttk.Frame(root)
+    frame.pack(expand=True)
 
-# Creazione dei pulsanti con stile moderno
-btn_seleziona_file = ttk.Button(frame, text="Seleziona File .M", command=seleziona_file)
-btn_seleziona_file.pack(pady=20)
+    # Create buttons with modern style
+    btn_select_file = ttk.Button(frame, text="Select .M File", command=select_file)
+    btn_select_file.pack(pady=20)
 
-# Esecuzione della finestra principale
-root.mainloop()
+    # Run the main window
+    root.mainloop()
+
+if __name__ == "__main__":
+    create_interface()
