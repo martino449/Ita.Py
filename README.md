@@ -1,4 +1,4 @@
-# M-interpreter
-This interpreter transform .M files in functioning .py programs
+# M-compiler
+This compiler transform .M files in functioning .py programs
 
 
