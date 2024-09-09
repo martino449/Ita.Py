@@ -39,7 +39,7 @@ SUBSTITUTIONS = {
     'aspetta': 'await',
     'asserisci': 'assert',
     'elimina': 'del',
-    'nessuno': 'None'
+    'niente': 'None'
 }
 
 def replace_word(input_file, output_file):
@@ -74,9 +74,9 @@ def select_file():
     """
     Opens a file dialog to select a .M file and starts the word replacement process.
     """
-    file_path = filedialog.askopenfilename(filetypes=[("M Files", "*.M")])
+    file_path = filedialog.askopenfilename(filetypes=[("M Files", "*.mar")])
     if file_path:
-        output_file = file_path.replace('.M', '_interpreted.py')
+        output_file = file_path.replace('.M', '.py')
         replace_word(file_path, output_file)
 
 def create_interface():
