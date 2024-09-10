@@ -14,10 +14,10 @@ Questa guida ti mostrerà come usare il programma `ita.py` per convertire il cod
 
 #### Passo 2: Scrivi il Codice in Italiano
 
-Crea un file Python usando parole chiave italiane. Chiamiamo questo file `esempio.py`. Ecco un esempio di codice in italiano:
+Crea un file Python usando parole chiave italiane. Chiamiamo questo file `esempio.itapy`. Ecco un esempio di codice in italiano:
 
 ```python
-# esempio.py
+# esempio.itapy
 definisci saluta(nome):
     stampa("Ciao, " + nome)
 
