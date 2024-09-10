@@ -92,5 +92,5 @@ print("Il risultato è " + str(risultato))
 ```
 
 
+![366018167-e85feb38-bcb8-49ff-8783-7a9519fe2468](https://github.com/user-attachments/assets/9beb8123-1e73-4de4-a5cb-8869474f67f8)
 
-![nTYfa7t9TBODC_mVdst4Sw](https://github.com/user-attachments/assets/e85feb38-bcb8-49ff-8783-7a9519fe2468)
