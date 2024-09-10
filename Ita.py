@@ -13,8 +13,8 @@ SUBSTITUTIONS = {
     'Falso': 'False',
     'Vero': 'True',
     'importa': 'import',
-    '__nome__': '__name__'
-    '__principale__": '__main__'
+    '__nome__': '__name__',
+    '__principale__': '__main__',
     'e': 'and',
     'stop': 'break',
     'mentre': 'while',
