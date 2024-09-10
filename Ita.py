@@ -1,5 +1,6 @@
 import os
 import re
+import subprocess
 
 # Dizionario di sostituzioni come costante
 SUBSTITUTIONS = {
@@ -47,7 +48,6 @@ def replace_word(input_file, output_file="convertito.py"):
         output_file (str): Il percorso del file di output.
     """
     if not os.path.exists(input_file):
-        # Se il file non esiste, crea un file di output con un messaggio predefinito
         with open(output_file, 'w') as f_output:
             f_output.write("# Questo file è stato creato perché l'input non è stato trovato.\n")
         print(f"Il file di input '{input_file}' non esiste. Un file di output vuoto è stato creato come '{output_file}'.")
@@ -68,13 +68,38 @@ def replace_word(input_file, output_file="convertito.py"):
     except Exception as e:
         print(f"Errore: {e}")
 
+def validate_syntax(file_path):
+    """
+    Convalida la sintassi del file Python convertito.
+    Args:
+        file_path (str): Il percorso del file da validare.
+    """
+    try:
+        subprocess.check_call(["python", "-m", "py_compile", file_path])
+        print("Nessun errore di sintassi rilevato.")
+    except subprocess.CalledProcessError:
+        print("Errore di sintassi nel file convertito.")
+
+def compile_and_run(input_file):
+    """
+    Compila il file e lo esegue.
+    Args:
+        input_file (str): Il percorso del file di input da convertire, compilare ed eseguire.
+    """
+    output_file = os.path.splitext(input_file)[0] + "_convertito.py"
+
+    # Sostituzione delle parole chiave
+    replace_word(input_file, output_file)
+
+    # Convalida sintattica
+    validate_syntax(output_file)
+
+    # Esecuzione del file convertito
+    try:
+        subprocess.run(["python", output_file], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Errore durante l'esecuzione del file: {e}")
 
 if __name__ == "__main__":
     input_file = input("Inserisci il file di input: ")
-    output_file = input("Inserisci il file di output (premi Invio per usare il nome di default): ")
-
-    if not output_file:
-        output_file = os.path.splitext(input_file)[0] + ".py"
-
-    replace_word(input_file, output_file)
-
+    compile_and_run(input_file)
