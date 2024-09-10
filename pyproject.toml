@@ -1,7 +1,7 @@
 name = "M-interpreter"
-version = "1.0.4"
+version = "1.0.5"
 description = ""
-authors = Martin449
-licence = "GNU General Public License v3.0"
+authors = Mario Pisano AKA Martin449
+licence = "EUPL 1.2"
 Dependencies:
 python = ">=3.10.0,<3.12"
