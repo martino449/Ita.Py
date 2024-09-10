@@ -105,3 +105,21 @@ def compile_and_run(input_file):
 if __name__ == "__main__":
     input_file = input("Inserisci il file di input: ")
     compile_and_run(input_file)
+
+
+
+
+
+
+
+
+
+
+
+
+#FINE CODICE
+# Disclaimer: Questo software è rilasciato sotto la Licenza EUPL (European Union Public License).
+# Utilizzare questo software è soggetto ai termini e alle condizioni della Licenza EUPL.
+# Per ulteriori dettagli, consultare il testo completo della licenza.
+#
+# Copyright (C) Mario Pisano, 2024. Tutti i diritti riservati.
