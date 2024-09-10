@@ -1,4 +1,4 @@
-### Guida: Come Usare il Programma `ita.py` per Convertire Parole Chiave in Python
+### Guida: Come Usare il Programma `ita.py`
 
 **Introduzione:**
 
