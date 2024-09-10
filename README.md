@@ -71,7 +71,7 @@ if __name__ == "__main__":
 
 Ecco un esempio di codice in italiano e la sua conversione:
 
-**Codice Italiano (`esempio_2.py`):**
+**Codice Italiano (`esempio_2.itapy`):**
 
 ```python
 definisci somma(a, b):
@@ -91,14 +91,6 @@ risultato = somma(3, 5)
 print("Il risultato è " + str(risultato))
 ```
 
----
-
-### Risoluzione dei Problemi
-
-- **File Non Trovato**: Se ricevi un errore che indica che il file di input non esiste, assicurati di aver inserito correttamente il nome del file.
-- **Errori di Sintassi**: Se ci sono errori di sintassi nel file convertito, verifica che tutte le parole chiave italiane siano state tradotte correttamente in inglese.
-
----
 
 
 ![nTYfa7t9TBODC_mVdst4Sw](https://github.com/user-attachments/assets/e85feb38-bcb8-49ff-8783-7a9519fe2468)
