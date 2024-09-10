@@ -1,10 +1,7 @@
 import os
 import re
-import tkinter as tk
-from tkinter import filedialog, messagebox
-from tkinter import ttk
 
-# Dictionary of substitutions as a constant
+# Dizionario di sostituzioni come costante
 SUBSTITUTIONS = {
     'stampa': 'print',
     'se': 'if',
@@ -12,8 +9,8 @@ SUBSTITUTIONS = {
     'altrimentise': 'elif',
     'definisci': 'def',
     'classe': 'class',
-    'falso': 'False',
-    'vero': 'True',
+    'Falso': 'False',
+    'Vero': 'True',
     'importa': 'import',
     'e': 'and',
     'stop': 'break',
@@ -29,27 +26,33 @@ SUBSTITUTIONS = {
     'con': 'with',
     'nonlocale': 'nonlocal',
     'globale': 'global',
-    'lambda': 'lambda',
     'asincrono': 'async',
     'attendi': 'await',
     'non': 'not',
     'o': 'or',
     'è': 'is',
-    'passa': 'pass',
-    'aspetta': 'await',
-    'asserisci': 'assert',
+    'ignora': 'pass',
     'elimina': 'del',
-    'niente': 'None'
+    'vuota': 'None',
+    'apri': 'open'
 }
 
-def replace_word(input_file, output_file):
+def replace_word(input_file, output_file="convertito.py"):
     """
-    Replaces Italian keywords in a file with corresponding English keywords.
+    Sostituisce le parole chiave italiane in un file con le corrispondenti parole chiave inglesi.
+    Se il file di input non esiste, crea un file di output con un messaggio predefinito.
 
     Args:
-        input_file (str): The path of the input file.
-        output_file (str): The path of the output file.
+        input_file (str): Il percorso del file di input.
+        output_file (str): Il percorso del file di output.
     """
+    if not os.path.exists(input_file):
+        # Se il file non esiste, crea un file di output con un messaggio predefinito
+        with open(output_file, 'w') as f_output:
+            f_output.write("# Questo file è stato creato perché l'input non è stato trovato.\n")
+        print(f"Il file di input '{input_file}' non esiste. Un file di output vuoto è stato creato come '{output_file}'.")
+        return
+
     try:
         with open(input_file, 'r') as f_input:
             content = f_input.read()
@@ -60,13 +63,18 @@ def replace_word(input_file, output_file):
         with open(output_file, 'w') as f_output:
             f_output.write(content)
 
-        print(f"Replacement completed. The resulting file has been saved as '{output_file}'.")
-        messagebox.showinfo("Success", f"Replacement completed. The resulting file has been saved as '{output_file}'.")
+        print(f"Sostituzione completata. Il file risultante è stato salvato come '{output_file}'.")
 
-    except FileNotFoundError:
-        print(f"Error: The file '{input_file}' was not found.")
-        messagebox.showerror("Error", f"Error: The file '{input_file}' was not found.")
     except Exception as e:
-        print(f"Error: {e}")
-        messagebox.showerror("Error", f"Error: {e}")
+        print(f"Errore: {e}")
+
+
+if __name__ == "__main__":
+    input_file = input("Inserisci il file di input: ")
+    output_file = input("Inserisci il file di output (premi Invio per usare il nome di default): ")
+
+    if not output_file:
+        output_file = os.path.splitext(input_file)[0] + ".py"
+
+    replace_word(input_file, output_file)
 
