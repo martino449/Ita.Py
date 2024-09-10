@@ -1,4 +1,4 @@
-# ItaPy
-This compiler transform .M files in functioning .py programs
+# Ita.Py
+This compiler transform .itapy files in functioning .py programs
 
 
